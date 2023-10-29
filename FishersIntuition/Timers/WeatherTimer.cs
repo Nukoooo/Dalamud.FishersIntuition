@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Linq;
 using Dalamud.Hooking;
+using Dalamud.Logging;
 using Dalamud.Utility.Signatures;
 using FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 
@@ -12,22 +13,19 @@ internal enum UpdateType : byte
 {
     UpdateWeather = 1, // arg1 is weather id
 
-    Setup =
-        3, // arg1 is CurrentRoute, arg2 is CurrentZone, arg3 is RemaingTime(always is 420), arg4 is TimeOffset(it is a timestamp for the time when the InstanceContent ends)
+    Setup = 3, // arg1 is CurrentRoute, arg2 is CurrentZone, arg3 is RemaingTime(always is 420), arg4 is TimeOffset(it is a timestamp for the time when the InstanceContent ends)
     ChangeZone = 4, // arg1 is new zone
 
-    UpdateCutsceneStatus =
-        5, // only arg1 has value. 2 is cutscene finished, 3 is cutscene started, 1 is play new cutscene (after changing the zone)
+    UpdateCutsceneStatus = 5, // only arg1 has value. 2 is cutscene finished, 3 is cutscene started, 1 is play new cutscene (after changing the zone)
     UpdateCurrnetZoneTime = 6, // arg1 is reaming time(and always is 420), arg2 is TimeOffset
     SpectralCurrentStart = 7, // arg1 is current start time offset?
     SpectralCurrentFinish = 8, // no values
     SpectralCurrentReset = 9, // this only happens after entering ocean fishing, and no values from args
 
-    SetSpawnPlaceName =
-        10, // arg1 is row id for PlaceName sheet, not sure what arg2 is, but it is a boolean and this only happens right after entering ocean fishing
+    SetSpawnPlaceName = 10, // arg1 is row id for PlaceName sheet, not sure what arg2 is, but it is a boolean and this only happens right after entering ocean fishing
     UpdateMissionProgress = 12, // arg1 is for Mission1, so on and so forth
     UpdateTimeOffset = 13, // arg1 is the new time offset
-};
+}
 
 internal partial class Timers
 {
@@ -78,13 +76,13 @@ internal partial class Timers
                 _oceanFishingExtraTime = 0f;
                 _oceanFishingLastZoneHasCurrent = false;
                 _oceanFishingHasCurrent = false;
-                break;
+                return;
             }
             case UpdateType.ChangeZone:
             {
                 _oceanFishingLastZoneHasCurrent = _oceanFishingHasCurrent;
                 _oceanFishingHasCurrent = false;
-                break;
+                return;
             }
             case UpdateType.SpectralCurrentStart:
             {
@@ -101,24 +99,27 @@ internal partial class Timers
 
                 duration = Math.Min(duration, 180f);
 
-                var endTime = timeLeft - duration;
+                var endTime = Math.Abs(timeLeft - duration);
                 if (endTime <= 30f)
                 {
-                    _oceanFishingExtraTime = Math.Clamp(Math.Abs(endTime - 30f), 0f, 60f);
+                    _oceanFishingExtraTime = Math.Clamp(Math.Abs(timeLeft - 30f), 0f, 60f);
 
-                    duration = endTime - 30;
+                    duration = timeLeft - 30;
                 }
+
+                PluginLog.Debug($"SpectralCurrentStart. duration: {duration}, timeLeft: {timeLeft}, endTime: {endTime}, extraTime: {_oceanFishingExtraTime}");
 
                 _oceanFishingHasCurrent = true;
 
                 _weatherDuration = TimeSpan.FromSeconds(duration);
                 _weatherTimer.Start();
-                break;
+                return;
             }
             case UpdateType.SpectralCurrentFinish:
             {
+                _oceanFishingHasCurrent = true;
                 _weatherTimer.Reset();
-                break;
+                return;
             }
         }
     }

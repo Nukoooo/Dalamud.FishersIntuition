@@ -11,7 +11,6 @@ public class ConfigWindow : Window
 
     public ConfigWindow() : base("FishersIntuitionConfigWindow")
     {
-        IsOpen = true;
         SizeCondition = ImGuiCond.FirstUseEver;
         _fileDialogManager = new FileDialogManager();
     }
@@ -108,7 +107,7 @@ public class ConfigWindow : Window
 
     public byte GetEditingColor()
     {
-        return  _editingColor;
+        return _editingColor;
     }
 
     public override void OnClose()

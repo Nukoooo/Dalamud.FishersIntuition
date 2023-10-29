@@ -9,7 +9,6 @@ using Dalamud.Logging;
 namespace FishersIntuition.Utils;
 
 // TODO: http://mark-dot-net.blogspot.com/2014/02/fire-and-forget-audio-playback-with.html
-
 internal class SoundEngine
 {
     private readonly string[] _resources = Assembly.GetExecutingAssembly().GetManifestResourceNames();
@@ -93,5 +92,4 @@ internal class SoundEngine
         stream = new WaveFileReader(resourceStream);
         return true;
     }
-
 }

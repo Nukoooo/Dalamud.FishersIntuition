@@ -19,9 +19,9 @@ public class PluginCommandManager<THost> : IDisposable
 
         _pluginCommands = host.GetType().GetMethods(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static |
                                                     BindingFlags.Instance)
-            .Where(method => method.GetCustomAttribute<CommandAttribute>() != null)
-            .SelectMany(GetCommandInfoTuple)
-            .ToArray();
+                              .Where(method => method.GetCustomAttribute<CommandAttribute>() != null)
+                              .SelectMany(GetCommandInfoTuple)
+                              .ToArray();
 
         AddCommandHandlers();
     }

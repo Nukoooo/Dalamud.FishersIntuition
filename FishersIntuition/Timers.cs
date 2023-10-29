@@ -25,14 +25,13 @@ internal partial class Timers : IDisposable
         ProcessEventPlayPacketHook.Enable();
         UpdateWeatherHook.Enable();
         OceanFishingInstanceContentUpdateHook.Enable();
-
     }
 
     public void Dispose()
     {
         if (_disposed)
             return;
-        
+
         _disposed = true;
 
         DalamudApi.Condition.ConditionChange -= OnConditionChanged;
