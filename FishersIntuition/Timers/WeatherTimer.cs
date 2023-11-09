@@ -99,7 +99,7 @@ internal partial class Timers
 
                 duration = Math.Min(duration, 180f);
 
-                var endTime = Math.Abs(timeLeft - duration);
+                var endTime = timeLeft - duration;
                 if (endTime <= 30f)
                 {
                     _oceanFishingExtraTime = Math.Clamp(Math.Abs(timeLeft - 30f), 0f, 60f);
