@@ -19,8 +19,8 @@ internal class TimerWindow : Window
         SizeCondition = ImGuiCond.FirstUseEver;
         SizeConstraints = new WindowSizeConstraints
         {
-            MinimumSize = new Vector2(150, 130),
-            MaximumSize = new Vector2(600, 130)
+            MinimumSize = new(150, 130),
+            MaximumSize = new(600, 130)
         };
     }
 
@@ -123,7 +123,7 @@ internal class TimerWindow : Window
                        BiteType.Weak => " |  轻杆",
                        BiteType.Strong => " |  重杆",
                        BiteType.Legendary => " |  鱼王杆",
-                       _ => ""
+                       _ => "",
                    };
 
         ImGui.TextUnformatted($"抛杆时间: {castTime:ss\\.fff} {type}".TrimStart(ColonZero));

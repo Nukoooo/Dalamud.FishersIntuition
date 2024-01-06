@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<TargetFramework>net7.0-windows</TargetFramework>
 		<LangVersion>latest</LangVersion>
-		<Version>1.0.0.3</Version>
+		<Version>1.0.0.4</Version>
 		<Configurations>Debug;Release</Configurations>
 	</PropertyGroup>
 
@@ -79,10 +79,6 @@
 			<HintPath>$(DalamudLibPath)\FFXIVClientStructs.dll</HintPath>
 			<Private>false</Private>
 		</Reference>
-	</ItemGroup>
-
-	<ItemGroup>
-		<Folder Include="Utils\NAudio\" />
 	</ItemGroup>
 
 </Project>

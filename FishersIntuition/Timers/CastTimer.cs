@@ -174,7 +174,7 @@ internal partial class Timers
                 return;
         }
 
-        Plugin.SoundEngine.Play(path);
+        Plugin.SoundEngine.Play(path, Plugin.Configuration.Volume / 100f);
     }
 
     private enum FishingStatus : ushort

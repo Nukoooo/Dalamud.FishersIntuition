@@ -17,7 +17,7 @@ public class EntryPoint : IDalamudPlugin
 
         Plugin.Initialize();
 
-        _windowSystem = new WindowSystem(typeof(EntryPoint).AssemblyQualifiedName);
+        _windowSystem = new(typeof(EntryPoint).AssemblyQualifiedName);
 
         _windowSystem.AddWindow(Plugin.ConfigWindow);
         _windowSystem.AddWindow(Plugin.TimerWindow);
@@ -26,7 +26,7 @@ public class EntryPoint : IDalamudPlugin
         DalamudApi.Interface.UiBuilder.OpenConfigUi += OpenConfigUi;
 
         // Load all of our commands
-        _commandManager = new PluginCommandManager<EntryPoint>(this);
+        _commandManager = new(this);
     }
 
     public string Name => "FishersIntuition";

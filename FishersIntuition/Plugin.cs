@@ -13,11 +13,11 @@ internal class Plugin
 
     public static void Initialize()
     {
-        ConfigWindow = new ConfigWindow();
-        TimerWindow = new TimerWindow();
+        ConfigWindow = new();
+        TimerWindow = new();
 
         Configuration = (Configuration)DalamudApi.Interface.GetPluginConfig() ?? DalamudApi.Interface.Create<Configuration>();
-        Timers = new Timers();
-        SoundEngine = new SoundEngine();
+        Timers = new();
+        SoundEngine = new();
     }
 }

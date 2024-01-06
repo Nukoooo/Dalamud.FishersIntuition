@@ -12,7 +12,7 @@ public class ConfigWindow : Window
     public ConfigWindow() : base("FishersIntuitionConfigWindow")
     {
         SizeCondition = ImGuiCond.FirstUseEver;
-        _fileDialogManager = new FileDialogManager();
+        _fileDialogManager = new();
     }
 
     public override void PreDraw()
@@ -102,6 +102,13 @@ public class ConfigWindow : Window
         if (ImGui.Checkbox("Play sound on bite", ref playSound))
         {
             Plugin.Configuration.PlaySound = playSound;
+        }
+
+        var volume = Plugin.Configuration.Volume;
+        ImGui.SetNextItemWidth(ImGui.GetFrameHeight() * 5);
+        if (ImGui.SliderFloat("Volume", ref volume, 0f, 100f))
+        {
+            Plugin.Configuration.Volume = volume;
         }
     }
 

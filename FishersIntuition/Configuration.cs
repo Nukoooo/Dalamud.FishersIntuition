@@ -18,6 +18,8 @@ internal class Configuration : IPluginConfiguration
     public float BarHeight { get; set; } = 15f;
 
     public bool PlaySound { get; set; } = false;
+    public float Volume { get; set; } = 50f;
+
     public string WeakBiteSoundPath { get; set; } = string.Empty;
     public string StrongBiteSoundPath { get; set; } = string.Empty;
     public string LegendaryBiteSoundPath { get; set; } = string.Empty;
