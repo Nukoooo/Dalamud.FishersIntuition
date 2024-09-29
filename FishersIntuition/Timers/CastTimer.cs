@@ -4,6 +4,7 @@ using Dalamud.Game.ClientState.Conditions;
 using Dalamud.Hooking;
 using Dalamud.Logging;
 using Dalamud.Utility.Signatures;
+using FFXIVClientStructs.FFXIV.Client.Game.UI;
 
 // ReSharper disable once CheckNamespace
 namespace FishersIntuition;
@@ -20,8 +21,7 @@ internal partial class Timers
 {
     private readonly Stopwatch _castTimer = new();
 
-    private readonly unsafe uint* _currentBitePtr = null;
-    private unsafe uint CurrentBite => *_currentBitePtr;
+    private unsafe uint CurrentBite => UIState.Instance()->PlayerState.FishingBait;
 
     private readonly TimeSpan _maxFishTime = TimeSpan.FromSeconds(63);
     private TimeSpan _elapsedTime = TimeSpan.Zero;
@@ -102,7 +102,7 @@ internal partial class Timers
                                 _ => BiteType.None
                             };
                 PlaySound();
-                PluginLog.Debug($"Bite {_elapsedTime.TotalMilliseconds}");
+                DalamudApi.PluginLog.Debug($"Bite {_elapsedTime.TotalMilliseconds}");
                 break;
             }
             case FishingStatus.Finish:
@@ -111,7 +111,7 @@ internal partial class Timers
                 {
                     _elapsedTime = _castTimer.Elapsed;
                     _castTimer.Reset();
-                    PluginLog.Debug($"Finish {_elapsedTime.TotalMilliseconds}");
+                    DalamudApi.PluginLog.Debug($"Finish {_elapsedTime.TotalMilliseconds}");
                 }
 
                 break;

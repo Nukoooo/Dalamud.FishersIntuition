@@ -107,7 +107,7 @@ internal partial class Timers
                     duration = timeLeft - 30;
                 }
 
-                PluginLog.Debug($"SpectralCurrentStart. duration: {duration}, timeLeft: {timeLeft}, endTime: {endTime}, extraTime: {_oceanFishingExtraTime}");
+                DalamudApi.PluginLog.Debug($"SpectralCurrentStart. duration: {duration}, timeLeft: {timeLeft}, endTime: {endTime}, extraTime: {_oceanFishingExtraTime}");
 
                 _oceanFishingHasCurrent = true;
 

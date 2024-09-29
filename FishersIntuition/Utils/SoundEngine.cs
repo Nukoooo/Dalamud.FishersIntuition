@@ -68,12 +68,12 @@ internal class SoundEngine
         try
         {
             stream = new MediaFoundationReader(path);
-            PluginLog.Debug($"Loaded sound file from path \"{path}\"");
+            DalamudApi.PluginLog.Debug($"Loaded sound file from path \"{path}\"");
             return true;
         }
         catch (Exception e)
         {
-            PluginLog.Error($"Could load sound file from path {path}. {e.Message}");
+            DalamudApi.PluginLog.Error($"Could load sound file from path {path}. {e.Message}");
         }
 
         stream = null;

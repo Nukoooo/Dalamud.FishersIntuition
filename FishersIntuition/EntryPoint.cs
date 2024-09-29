@@ -10,7 +10,7 @@ public class EntryPoint : IDalamudPlugin
     private readonly PluginCommandManager<EntryPoint> _commandManager;
     private readonly WindowSystem _windowSystem;
 
-    public EntryPoint([RequiredVersion("1.0")] DalamudPluginInterface pi)
+    public EntryPoint(IDalamudPluginInterface pi)
     {
         pi.Create<DalamudApi>();
         pi.Create<Plugin>();

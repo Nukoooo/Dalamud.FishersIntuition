@@ -8,16 +8,9 @@ internal partial class Timers : IDisposable
 {
     private bool _disposed;
 
-    public unsafe Timers()
+    public Timers()
     {
-        SignatureHelper.Initialise(this);
-
-        if (!DalamudApi.SigScanner.TryGetStaticAddressFromSig("3B 05 ?? ?? ?? ?? 75 ?? C6 43", out var address))
-        {
-            throw new InvalidDataException("Failed to get address for current bite");
-        }
-
-        _currentBitePtr = (uint*)address;
+        DalamudApi.GameInterop.InitializeFromAttributes(this);
 
         DalamudApi.Condition.ConditionChange += OnConditionChanged;
 

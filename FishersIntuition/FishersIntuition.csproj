@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net7.0-windows</TargetFramework>
+		<TargetFramework>net8.0-windows7.0</TargetFramework>
 		<LangVersion>latest</LangVersion>
 		<Version>1.0.0.4</Version>
 		<Configurations>Debug;Release</Configurations>
@@ -22,7 +22,7 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)' == 'Release' Or '$(Configuration)' == 'Debug'">
-		<DalamudLibPath>C:\XivLauncherCN\XIVLauncherCN\Roaming\addon\Hooks\dev</DalamudLibPath>
+		<DalamudLibPath>F:\XivLauncherCn\XIVLauncherCN\Roaming\addon\Hooks\dev</DalamudLibPath>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -44,7 +44,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="DalamudPackager" Version="2.1.11" />
+		<PackageReference Include="DalamudPackager" Version="2.1.13" />
 		<PackageReference Include="NAudio.Core" Version="2.2.1" />
 		<PackageReference Include="NAudio.Wasapi" Version="2.2.1" />
 		<PackageReference Include="NAudio.WinMM" Version="2.2.1" />
