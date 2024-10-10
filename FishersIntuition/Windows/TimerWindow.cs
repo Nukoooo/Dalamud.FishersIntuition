@@ -16,6 +16,7 @@ internal class TimerWindow : Window
     public TimerWindow() : base("FishersIntuitionTimerWindow")
     {
         IsOpen = true;
+        RespectCloseHotkey = false;
         SizeCondition = ImGuiCond.FirstUseEver;
         SizeConstraints = new WindowSizeConstraints
         {
