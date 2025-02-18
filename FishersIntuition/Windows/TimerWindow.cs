@@ -33,7 +33,7 @@ internal class TimerWindow : Window
         if (Plugin.Configuration.IsEditing)
             return true;
 
-        return DalamudApi.ClientState.LocalPlayer.ClassJob.Id == 18 && DalamudApi.Condition[ConditionFlag.Gathering];
+        return DalamudApi.ClientState.LocalPlayer.ClassJob.Value.RowId == 18 && DalamudApi.Condition[ConditionFlag.Gathering];
     }
 
     public override void PreDraw()
