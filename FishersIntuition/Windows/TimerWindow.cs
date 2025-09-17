@@ -1,9 +1,8 @@
-﻿using System;
-using System.Numerics;
+﻿using System.Numerics;
+using Dalamud.Bindings.ImGui;
 using Dalamud.Game.ClientState.Conditions;
 using Dalamud.Interface.Windowing;
 using FishersIntuition.Utils;
-using ImGuiNET;
 
 namespace FishersIntuition.Windows;
 
