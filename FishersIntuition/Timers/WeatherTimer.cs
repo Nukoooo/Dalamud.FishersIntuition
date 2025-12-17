@@ -1,9 +1,5 @@
-﻿using System;
-using System.Diagnostics;
-using System.Linq;
+﻿using System.Diagnostics;
 using Dalamud.Hooking;
-using Dalamud.Logging;
-using Dalamud.Utility.Signatures;
 using FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 
 // ReSharper disable once CheckNamespace
@@ -29,16 +25,13 @@ internal enum UpdateType : byte
 
 internal partial class Timers
 {
-    private readonly byte[] _specialWeathers = { 133, 134, 135, 136, 145 };
-    private readonly Stopwatch _weatherTimer = new();
-    private TimeSpan _weatherDuration = TimeSpan.Zero;
+    private readonly byte[]    _specialWeathers = [133, 134, 135, 136, 145];
+    private readonly Stopwatch _weatherTimer    = new ();
+    private          TimeSpan  _weatherDuration = TimeSpan.Zero;
 
-    [Signature("84 D2 74 ?? 80 79 ?? ?? 88 51", DetourName = nameof(hk_UpdateWeather))]
     // ReSharper disable once AutoPropertyCanBeMadeGetOnly.Local
     private Hook<UpdateWeatherDelegate> UpdateWeatherHook { get; init; } = null!;
 
-    [Signature("83 FA ?? 0F 87 ?? ?? ?? ?? 48 89 5C 24 ?? 57 48 83 EC ?? 48 8B 05",
-               DetourName = nameof(hk_OceanFishingInstanceContentUpdate))]
     // ReSharper disable once AutoPropertyCanBeMadeGetOnly.Local
     private Hook<OceanFishingInstanceContentUpdateDelegate> OceanFishingInstanceContentUpdateHook { get; init; } =
         null!;

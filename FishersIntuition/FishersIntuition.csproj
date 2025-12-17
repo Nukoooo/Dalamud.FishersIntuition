@@ -1,9 +1,10 @@
-﻿<Project Sdk="Dalamud.CN.NET.Sdk/13.1.0">
+﻿<Project Sdk="Dalamud.CN.NET.Sdk/14.0.0">
 	<PropertyGroup>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
-		<Version>1.0.0.10</Version>
+		<Version>1.0.0.11</Version>
         <Use_Dalamud_CN>true</Use_Dalamud_CN>
+        <TargetFramework>net10.0-windows7.0</TargetFramework>
 	</PropertyGroup>
 
 	<ItemGroup>

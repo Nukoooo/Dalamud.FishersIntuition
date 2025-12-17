@@ -1,7 +1,5 @@
 ﻿using Dalamud.Interface.Windowing;
-using Dalamud.IoC;
 using Dalamud.Plugin;
-using System;
 
 namespace FishersIntuition;
 
@@ -13,7 +11,6 @@ public class EntryPoint : IDalamudPlugin
     public EntryPoint(IDalamudPluginInterface pi)
     {
         pi.Create<DalamudApi>();
-        pi.Create<Plugin>();
 
         Plugin.Initialize();
 
