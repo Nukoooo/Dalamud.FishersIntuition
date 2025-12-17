@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using Dalamud.Hooking;
+using Dalamud.Utility.Signatures;
 using FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 
 // ReSharper disable once CheckNamespace
@@ -30,8 +31,11 @@ internal partial class Timers
     private          TimeSpan  _weatherDuration = TimeSpan.Zero;
 
     // ReSharper disable once AutoPropertyCanBeMadeGetOnly.Local
+    [Signature("84 D2 74 ?? 80 79 ?? ?? 88 51", DetourName = nameof(hk_UpdateWeather))]
     private Hook<UpdateWeatherDelegate> UpdateWeatherHook { get; init; } = null!;
 
+    [Signature("83 FA ?? 0F 87 ?? ?? ?? ?? 48 89 5C 24 ?? 57 48 83 EC ?? 48 8B 05",
+        DetourName = nameof(hk_OceanFishingInstanceContentUpdate))]
     // ReSharper disable once AutoPropertyCanBeMadeGetOnly.Local
     private Hook<OceanFishingInstanceContentUpdateDelegate> OceanFishingInstanceContentUpdateHook { get; init; } =
         null!;
@@ -132,7 +136,7 @@ internal partial class Timers
     }
 
     private delegate void UpdateWeatherDelegate(nint a1, byte weatherType, float a3, byte a4);
-
+    
     private unsafe delegate void OceanFishingInstanceContentUpdateDelegate(
         InstanceContentOceanFishing* a1, UpdateType updateType, int arg1, int arg2, int arg3, int arg4);
 }

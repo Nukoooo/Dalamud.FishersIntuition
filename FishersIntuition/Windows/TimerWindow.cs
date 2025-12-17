@@ -26,14 +26,14 @@ internal class TimerWindow : Window
 
     public override bool DrawConditions()
     {
-        if (DalamudApi.PlayerState is not { } local)
-        {
-            return false;
-        }
-
         if (Plugin.Configuration.IsEditing)
         {
             return true;
+        }
+        
+        if (!DalamudApi.PlayerState.IsLoaded)
+        {
+            return false;
         }
 
         return DalamudApi.PlayerState.ClassJob.Value.RowId == 18 && DalamudApi.Condition[ConditionFlag.Gathering];

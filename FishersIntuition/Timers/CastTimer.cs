@@ -1,6 +1,9 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using Dalamud.Game.ClientState.Conditions;
 using Dalamud.Hooking;
+using Dalamud.Logging;
+using Dalamud.Utility.Signatures;
 using FFXIVClientStructs.FFXIV.Client.Game.UI;
 
 // ReSharper disable once CheckNamespace
@@ -29,9 +32,12 @@ internal partial class Timers
     private uint _moochFishId = 0;
 
     // ReSharper disable once AutoPropertyCanBeMadeGetOnly.Local
+    [Signature("40 55 56 41 54 41 55 41 57 48 8D 6C 24 ?? 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 45 ?? 49 8B F1", DetourName = nameof(hk_ProcessSystemLogMessagePacket))]
     private Hook<ProcessSystemLogMessagePacketDelegate> ProcessSystemLogMessagePacketHook { get; init; } = null!;
 
     // ReSharper disable once AutoPropertyCanBeMadeGetOnly.Local
+    [Signature("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 8B 81 ?? ?? ?? ?? 41 0F B7 F1",
+               DetourName = nameof(hk_ProcessEventPlayPacket))]
     private Hook<ProcessEventPlayPacketDelegate> ProcessEventPlayPacketHook { get; init; } = null!;
 
     private unsafe void hk_ProcessSystemLogMessagePacket(nint a1, uint eventId, uint logId, nint a4, byte a5)
