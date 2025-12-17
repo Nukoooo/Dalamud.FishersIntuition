@@ -26,7 +26,7 @@ internal class TimerWindow : Window
 
     public override bool DrawConditions()
     {
-        if (DalamudApi.PlayerState is not { } local)
+        if (!DalamudApi.PlayerState.IsLoaded)
         {
             return false;
         }
