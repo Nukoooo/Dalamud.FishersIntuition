@@ -1,8 +1,6 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using Dalamud.Game.ClientState.Conditions;
 using Dalamud.Hooking;
-using Dalamud.Logging;
 using Dalamud.Utility.Signatures;
 using FFXIVClientStructs.FFXIV.Client.Game.UI;
 
@@ -40,14 +38,14 @@ internal partial class Timers
                DetourName = nameof(hk_ProcessEventPlayPacket))]
     private Hook<ProcessEventPlayPacketDelegate> ProcessEventPlayPacketHook { get; init; } = null!;
 
-    private unsafe void hk_ProcessSystemLogMessagePacket(nint a1, uint eventId, uint logId, nint a4, byte a5)
+    private unsafe void hk_ProcessSystemLogMessagePacket(nint a1, uint eventId, uint logId, uint* a4, byte a5)
     {
         ProcessSystemLogMessagePacketHook.Original(a1, eventId, logId, a4, a5);
 
         if (eventId != 0x150001)
             return;
 
-        var data = *(uint*)a4;
+        var data = *a4;
 
         switch (logId)
         {
@@ -187,8 +185,7 @@ internal partial class Timers
         BiteHook = 6
     }
 
-
-    private delegate void ProcessSystemLogMessagePacketDelegate(nint a1, uint a2, uint a3, nint a4, byte a5);
+    private unsafe delegate void ProcessSystemLogMessagePacketDelegate(nint a1, uint a2, uint a3, uint* a4, byte a5);
 
     private delegate void ProcessEventPlayPacketDelegate(nint eventFrameworkPtr, nint a2, uint eventId,
                                                          FishingStatus status, nint a5,
